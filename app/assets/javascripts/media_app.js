@@ -1,10 +1,10 @@
-var media_app = angular.module('MediaApp', []);
+var media_app = angular.module('MediaApp', ['ngTagsInput']);
 
 media_app.controller('MediaController', ['$scope', '$http', function($scope, $http) {
-  $scope.disclaimers = [];
+  $scope.clips = [];
   $scope.loading = false;
 
   $scope.init = function(clips) {
-    $scope.disclaimers = data;
+    $scope.clips = clips;
   };
 }]);

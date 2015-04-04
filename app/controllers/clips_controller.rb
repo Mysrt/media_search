@@ -3,6 +3,13 @@ class ClipsController < ApplicationController
 
   def index
     @clips = Clip.all
+
+    respond_to do |format|
+      format.html{
+        @clips_json = @clips.to_json(root: false)
+      }
+      format.js {}
+    end
   end
 
   def show

@@ -1,24 +1,21 @@
-- model_class = Clip
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:path)
-      %th= model_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})"}
- 
-    - @clips.each do |clip|
-      %tr
-        %td= link_to clip.id, clip_path(clip)
-        %td= clip.title
-        %td= clip.path
-        %td=l clip.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_clip_path(clip), :class => 'btn btn-default btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), clip_path(clip), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+  %h1=t '.title', :default => "Clips"
 
-= link_to t('.new', :default => t("helpers.links.new")), new_clip_path, :class => 'btn btn-primary'
+  
+%div{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})"}
+
+  %tags-input{'ng-model' => 'tags'}
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Id
+        %th Title
+
+    %tbody
+      %tr{'ng-repeat' => 'clip in clips'}
+        %td
+          {{clip.id}}
+        %td
+          {{clip.title}}
+

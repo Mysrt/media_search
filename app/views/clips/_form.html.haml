@@ -1,0 +1,13 @@
+= form_for @clip, html: { class: "form form-horizontal clip" } do |f|
+  .form-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title, class: 'form-control', required: true
+    = error_span(@clip[:title])
+  .form-group
+    = f.label :path, class: 'control-label'
+    .controls
+      = f.text_field :path, class: 'form-control', required: true
+    = error_span(@clip[:path])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), clips_path, :class => 'btn btn-default'

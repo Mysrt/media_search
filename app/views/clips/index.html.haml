@@ -9,7 +9,8 @@
       %th= model_class.human_attribute_name(:path)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
-  %tbody
+  %tbody{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})"}
+ 
     - @clips.each do |clip|
       %tr
         %td= link_to clip.id, clip_path(clip)

@@ -3,7 +3,7 @@ class ClipsController < ApplicationController
 
   def index
     @clips = if params[:tags].present?
-               Clip.tagged_with(params[:tags], match_all: true, on: :subject) 
+               Clip.tagged_with(params[:tags], on: :subject).preload(:taggings)
              else
                Clip.all
              end
@@ -13,12 +13,16 @@ class ClipsController < ApplicationController
         @clips_json = @clips.to_json(root: false)
       }
       format.json {
-        render json: @clips
+        render json: @clips, each_serializer: ClipSerializer
       }
     end
   end
 
   def show
+    send_file(@clip.path,
+              :disposition => 'inline',
+              :type => 'image/jpeg',
+              :x_sendfile => true )
   end
 
   def new

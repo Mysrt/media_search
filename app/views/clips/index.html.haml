@@ -1,5 +1,5 @@
 .page-header
-  %h1=t '.title', :default => "Clips"
+  %h1=t '.title', :default => "Search Clips"
 
   
 %div{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})", 'id' => 'media_app'}
@@ -9,16 +9,17 @@
   %table.table.table-striped
     %thead
       %tr
-        %th Id
         %th Title
 
     %tbody{'ng-if' => '!loading'}
       %tr{'ng-repeat' => 'clip in clips', }
         %td
-          {{clip.id}}
-        %td
           {{clip.title}}
-
+          %span{'ng-repeat' => 'tag in clip.tags'}
+            %span.label.label-info
+              {{tag}}
+          %div
+            %img.clip_image{'ng-src' => '/clips/{{clip.id}}'}
 
     #loading-gif{'ng-if' => 'loading'}
       %h3 loading...

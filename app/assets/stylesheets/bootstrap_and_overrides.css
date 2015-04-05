@@ -25,3 +25,11 @@
   width: 270px;
   height: 62px;
 }
+
+.clip_image {
+  height: 100px;
+  width: 100px;
+
+}
+
+.label {margin-right: 5px;}

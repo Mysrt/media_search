@@ -3,10 +3,10 @@ var media_app = angular.module('MediaApp', ['ngTagsInput']);
 media_app.controller('MediaController', ['$scope', '$http', function($scope, $http) {
   $scope.clips = [];
   $scope.tags = [];
-  $scope.loading = false;
+  $scope.loading = true;
 
   $scope.init = function(clips) {
-    $scope.clips = clips;
+    $scope.refresh_list();
   };
 
   $scope.refresh_list = function() {
@@ -17,7 +17,7 @@ media_app.controller('MediaController', ['$scope', '$http', function($scope, $ht
       method: "GET",
       params: {tags: $scope.tag_list()},
     }).then(function(response){
-      $scope.clips = response.data;
+      $scope.clips = response.data.clips;
       $scope.loading = false;
     }, function(response){
       //error here

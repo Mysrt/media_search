@@ -25,5 +25,8 @@ module MediaSearch
     config.generators do |g|
       g.template_engine :haml
     end
+
+    ActsAsTaggableOn.force_lowercase = true
+    
   end
 end

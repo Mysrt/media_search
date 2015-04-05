@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require angular.min
+//= require underscore.min
 //= require media_app
 //= require ng-tags-input.min
 //= require_tree .

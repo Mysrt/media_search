@@ -2,13 +2,19 @@ class ClipsController < ApplicationController
   before_action :set_clip, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clips = Clip.all
+    @clips = if params[:tags].present?
+               Clip.tagged_with(params[:tags], match_all: true, on: :subject) 
+             else
+               Clip.all
+             end
 
     respond_to do |format|
       format.html{
         @clips_json = @clips.to_json(root: false)
       }
-      format.js {}
+      format.json {
+        render json: @clips
+      }
     end
   end
 

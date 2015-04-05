@@ -2,9 +2,9 @@
   %h1=t '.title', :default => "Clips"
 
   
-%div{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})"}
+%div{'ng-app' => 'MediaApp', 'ng-controller' => 'MediaController', 'ng-init' => "init(#{@clips_json})", 'id' => 'media_app'}
 
-  %tags-input{'ng-model' => 'tags'}
+  %tags-input{'ng-model' => 'tags', 'on-tag-added' => 'refresh_list()', 'on-tag-removed' => 'refresh_list()'}
 
   %table.table.table-striped
     %thead
@@ -12,11 +12,13 @@
         %th Id
         %th Title
 
-    %tbody
-      %tr{'ng-repeat' => 'clip in clips'}
+    %tbody{'ng-if' => '!loading'}
+      %tr{'ng-repeat' => 'clip in clips', }
         %td
           {{clip.id}}
         %td
           {{clip.title}}
 
-  = link_to t('.new', :default => t("helpers.links.new")), new_clip_path, :class => 'btn btn-primary'
+
+    #loading-gif{'ng-if' => 'loading'}
+      %h3 loading...

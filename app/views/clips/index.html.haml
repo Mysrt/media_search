@@ -14,12 +14,13 @@
     %tbody{'ng-if' => '!loading'}
       %tr{'ng-repeat' => 'clip in clips', }
         %td
-          {{clip.title}}
-          %span{'ng-repeat' => 'tag in clip.tags'}
-            %span.label.label-info
-              {{tag}}
-          %div
+          %div.pull-left
             %img.clip_image{'ng-src' => '/clips/{{clip.id}}'}
-
+          .media-body
+            %h5
+              {{clip.title}}
+            %span{'ng-repeat' => 'tag in clip.tags'}
+              %span.label.label-info
+                {{tag}}
     #loading-gif{'ng-if' => 'loading'}
       %h3 loading...
